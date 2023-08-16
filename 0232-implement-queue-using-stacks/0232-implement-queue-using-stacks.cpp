@@ -1,49 +1,39 @@
 class MyQueue {
 public:
-    stack<int>main,copy;
+    stack<int>input,output;
     MyQueue() {
         
     }
+
+    void reverse(){
+        while(!input.empty()){
+            output.push(input.top());
+            input.pop();
+        }
+    }
     
     void push(int x) {
-        main.push(x);
+        input.push(x);
         
     }
     
     int pop() {
-        int ans;
-        while(!main.empty()){
-            copy.push(main.top());
-            main.pop();
-        }
-        ans=copy.top();
-        copy.pop();
-        while(!copy.empty()){
-            main.push(copy.top());
-            copy.pop();
-        }
-        return ans;
+       if(output.empty()) reverse();
+       int ans=output.top();
+       output.pop();
+       return ans;
 
         
     }
     
     int peek() {
-        int ans;
-         while(!main.empty()){
-            copy.push(main.top());
-            main.pop();
-        }
-        ans=copy.top();
-        while(!copy.empty()){
-            main.push(copy.top());
-            copy.pop();
-        }
-        return ans;
-        
+       if(output.empty()) reverse();
+       return output.top();
+
     }
     
     bool empty() {
-        if(main.size()==0) return true;
+        if(input.empty() && output.empty()) return true;
         return false;
         
     }
